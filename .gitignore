@@ -1,5 +1,5 @@
 # Ignore OS generated files.
-
+.idea
 .DS_Store
 .DS_Store?
 ._*

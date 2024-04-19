@@ -1,0 +1,14 @@
+lock_file: "{{ root_folder }}/.lock"
+lock_await_release_timeout: 30
+typo3_install: false
+keep_releases: 5
+shared_paths:
+  [
+    {src: "../../shared/.env.local", dest: ".env.local", state: "touch", symlink: "true"},
+    {src: "../../shared/var", dest: "var", state: "directory", symlink: "true"},
+    {dest: "config/system", state: "directory", symlink: "false"},
+    {src: "../../../../shared/config/system/settings.php", dest: "config/system/settings.php", state: "touch", symlink: "true"},
+    {src: "../../../shared/public/fileadmin", dest: "public/fileadmin", state: "directory", symlink: "true"},
+    {src: "../../../shared/public/.htpasswd", dest: "public/.htpasswd", state: "touch", symlink: "true"},
+    {src: "../../../shared/public/typo3temp", dest: "public/typo3temp", state: "directory", symlink: "true"}
+  ]

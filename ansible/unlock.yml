@@ -1,0 +1,10 @@
+---
+- hosts: production
+  vars_files:
+    - vars.yml
+  tasks:
+    -
+      name: Remove lock file
+      file:
+        path: "{{ lock_file }}"
+        state: absent

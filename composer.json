@@ -1,12 +1,6 @@
 {
-  "name": "vendor-name/package-name",
+  "name": "wlwwt/wordpress-base",
   "description": "",
-  "authors": [
-    {
-      "name": "",
-      "email": "email@example.com"
-    }
-  ],
   "license": "proprietary",
   "require": {
     "wpackagist-plugin/limit-login-attempts": "1.*",
@@ -14,31 +8,20 @@
     "wpackagist-theme/twentytwentyfour": "1.*",
     "wordpress/wordpress": "6.*"
   },
-  "require-dev": {
-    "wpackagist-plugin/developer": "*",
-    "wpackagist-plugin/debug-bar": "*",
-    "wpackagist-plugin/debug-bar-console": "*",
-    "wpackagist-plugin/debug-bar-cron": "*",
-    "wpackagist-plugin/debug-bar-extender": "*",
-    "wpackagist-plugin/log-deprecated-notices": "*",
-    "wpackagist-plugin/regenerate-thumbnails": "*",
-    "wpackagist-plugin/rewrite-rules-inspector": "*",
-    "wpackagist-plugin/theme-check": "*"
-  },
   "repositories": [
     {
       "type": "composer",
       "url": "https://wpackagist.org"
-    },
-    {
-      "type": "composer",
-      "url": "https://dboulet.github.io/wp-composer-repository/"
     }
   ],
   "extra": {
     "installer-paths": {
-      "public/wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
-      "public/wp-content/themes/{$name}/": ["type:wordpress-theme"]
+      "public/wp-content/plugins/{$name}/": [
+        "type:wordpress-plugin"
+      ],
+      "public/wp-content/themes/{$name}/": [
+        "type:wordpress-theme"
+      ]
     },
     "webroot-dir": "public/wp",
     "webroot-package": "wordpress/wordpress"
@@ -48,5 +31,40 @@
       "composer/installers": true,
       "fancyguy/webroot-installer": true
     }
+  },
+  "scripts": {
+    "configure-env": [
+      "@configure-wordpresss"
+    ],
+    "configure-wordpresss": [
+      "@composer install",
+      "ln -sfn public/wp-config.development.php public/wp-config.php"
+    ],
+    "build": [
+      "./bin/build.sh build"
+    ],
+    "build-clean": [
+      "./bin/build.sh cleanup"
+    ],
+    "deploy": [
+      "./bin/build.sh build",
+      "ansible-playbook -i ansible/inventory.yml ansible/deploy.yml",
+      "./bin/build.sh cleanup"
+    ],
+    "deploy-unlock": [
+      "ansible-playbook -i ansible/inventory.yml ansible/unlock.yml"
+    ],
+    "sync": [
+      "./bin/sync"
+    ]
+  },
+  "scripts-descriptions": {
+    "configure-env": "Configures Wordpress",
+    "configure-wordpresss": "Configures Wordpress environments",
+    "build": "Builds the project to the .build directory",
+    "build-clean": "Cleans up the projects .build directory",
+    "deploy": "Deploys the project to production environment (executes a complete build, deployment, cleanup cycle)",
+    "deploy-unlock": "Unlocks the deployment in production environment if needed",
+    "sync": "Allows to sync the given environment to development (files + DB)"
   }
 }

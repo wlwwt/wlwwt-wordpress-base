@@ -1,0 +1,100 @@
+---
+- hosts: production
+  vars_files:
+    - vars.yml
+  pre_tasks:
+    -
+      name: Check for lock file
+      wait_for:
+        path: "{{ lock_file }}"
+        state: absent
+        timeout: "{{ lock_await_release_timeout }}"
+    -
+      name: Create lock file
+      file:
+        path: "{{ item.path }}"
+        state: "{{ item.state }}"
+      loop:
+        - { path: "{{ root_folder }}", state: directory }
+        - { path: "{{ lock_file }}", state: touch }
+  tasks:
+    - name: Initialize the deploy root and gather facts
+      community.general.deploy_helper:
+        path: "{{ root_folder }}"
+    - name: Create backup dir in current release
+      file:
+        state: directory
+        path: "{{ deploy_helper.current_path }}/backup"
+      when: not typo3_install
+    - name: Create database backup
+      shell:
+        cmd: "{{ php_interpreter }} bin/typo3 database:export | gzip -c > backup/database_backup_{{ ansible_date_time.iso8601_micro }}.sql.gz"
+        chdir: "{{ deploy_helper.current_path }}"
+      when: not typo3_install
+    - name: Create release path
+      file:
+        state: directory
+        path: "{{ deploy_helper.new_release_path }}"
+    - name: Extract dist.tar.gz into {{ deploy_helper.new_release_path }}
+      unarchive:
+        src: "../.build/dist/artifact.tar.gz"
+        dest: "{{ deploy_helper.new_release_path }}"
+    - name: Create some folders in the shared folder
+      file:
+        state: '{{ item.state }}'
+        path: '{{ deploy_helper.shared_path }}/{{ item.dest }}'
+      loop: "{{ shared_paths|flatten(levels=1) }}"
+    - name: Create symlinks for shared paths
+      file:
+        state: link
+        path: "{{ deploy_helper.new_release_path }}/{{ item.dest }}"
+        src: "{{ item.src }}"
+      loop: "{{ shared_paths|flatten(levels=1) | selectattr('symlink', 'equalto', 'true') | list }}"
+    - name: Create htaccess symlink
+      file:
+        state: link
+        path: "{{ deploy_helper.new_release_path }}/public/.htaccess"
+        src: ".htaccess_production"
+    - name: Run TYPO3 console commands
+      command: "{{ php_interpreter }} bin/typo3 {{ item }}"
+      args:
+        chdir: "{{ deploy_helper.new_release_path }}"
+      loop:
+        - "database:updateschema"
+        - "cache:flush"
+      when: not typo3_install
+    - name: Clear OPcache
+      command: "{{ item }}"
+      args:
+        chdir: "{{ deploy_helper.new_release_path }}"
+      loop:
+        - "sudo systemctl reload apache2"
+      when: not typo3_install
+    - name: Run TYPO3 installation
+      command: "{{ item }}"
+      args:
+        chdir: "{{ deploy_helper.new_release_path }}"
+      loop:
+        - "rm -f {{ deploy_helper.shared_path }}/config/system/settings.php"
+        - "{{ php_interpreter }} bin/typo3 install:setup -n --force --use-existing-database --database-user-name={{ typo3_db_user }} --database-user-password={{ typo3_db_password }} --database-name={{ typo3_db_name }} --admin-user-name={{ typo3_admin }} --admin-password={{ typo3_admin_password }}"
+        - "mv -f config/system/settings.php {{ deploy_helper.shared_path }}/config/system/settings.php"
+        - "ln -s ../../../../shared/config/system/settings.php config/system/settings.php"
+        - "rm -f public/.htpasswd"
+        - "htpasswd -bcs public/.htpasswd {{ basic_auth_user }} {{ basic_auth_password }}"
+        - "mv -f public/.htpasswd {{ deploy_helper.shared_path }}/public/.htpasswd"
+        - "ln -s ../../../shared/public/.htpasswd public/.htpasswd"
+      when: typo3_install
+    - name: Finalize the deploy, switching the symlink
+      command: "ln -sfn releases/{{ deploy_helper.new_release }} current"
+      args:
+        chdir: "{{ root_folder }}"
+    - name: Finalize the deploy, removing the unfinished file
+      community.general.deploy_helper:
+        path: "{{ root_folder }}"
+        state: clean
+  post_tasks:
+    -
+      name: Remove lock file
+      file:
+        path: "{{ lock_file }}"
+        state: absent

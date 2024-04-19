@@ -1,0 +1,9 @@
+all:
+  hosts:
+    production:
+      ansible_host: ---project-web-host---
+      ansible_user: ---project-web-user---
+      ansible_remote_tmp: ~/tmp
+      ansible_python_interpreter: /usr/bin/python3
+      php_interpreter: /usr/bin/php82
+      root_folder: ~/htdocs/production-12lts

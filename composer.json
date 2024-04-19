@@ -40,7 +40,7 @@
     ],
     "configure-wordpresss": [
       "@composer install",
-      "ln -sfn public/wp-config.development.php public/wp-config.php"
+      "ln -sfn wp-config.development.php public/wp-config.php"
     ],
     "build": [
       "./bin/build.sh build"

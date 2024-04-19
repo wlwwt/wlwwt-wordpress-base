@@ -17,6 +17,7 @@ Thumbs.db
 !/public/wp-content/plugins/index.php
 /public/wp-content/themes/*
 !/public/wp-content/themes/index.php
+/public/wp-content/languages
 
 # Ignore files containing sensitive information.
 

@@ -1,0 +1,85 @@
+#!/bin/bash
+
+##
+## The script allows to rsync the
+## fileadmin and the current database
+## with the given environment
+##
+## Usage: sync <environment>
+##
+##  -c, --checksum
+##  -h, --human-readable
+##  -a, --archive
+##  -v, --verbose
+##  -z, --compress
+##  -P same as --partial --progress
+##
+
+USER="---project-web-user---"
+SERVER="---project-web-host---"
+PHP_BINARY="/usr/bin/php82"
+DOCROOT="/var/www/$USER/htdocs"
+ENV="$DOCROOT/$1"
+FILE_FOLDER="$ENV/shared/public/fileadmin"
+CURRENT_FOLDER="$ENV/current"
+
+echo "-------------------------------------------------------"
+echo "Sync works in the following environment..."
+echo "User: $USER"
+echo "Server: $SERVER"
+echo "PHP_BINARY: $PHP_BINARY"
+echo "Doc: $DOCROOT"
+echo "Env: $ENV"
+echo "File folder: $FILE_FOLDER"
+echo "Current folder: $CURRENT_FOLDER"
+echo "-------------------------------------------------------"
+
+echo "Checking environment..."
+
+# check if we got rsync
+if hash rsync 2>/dev/null; then
+    echo "Rsync found..."
+else
+    echo "Rsync not found."
+    exit 1
+fi
+
+# check if the remote env exists
+if ssh $USER@$SERVER "[ -d $ENV ]"; then
+  echo "Environment $ENV found"
+else
+  echo "Environment $ENV remotely not found..."
+  exit 1
+fi
+
+# check if the remote folder exists
+if ssh $USER@$SERVER "[ -d $FILE_FOLDER ]"; then
+  echo "Remote folder $FILE_FOLDER found..."
+else
+  echo "Remote folder $FILE_FOLDER not found ..."
+  exit 1
+fi
+
+# check if the php binary exists
+if ssh $USER@$SERVER "[ -f $PHP_BINARY ]"; then
+  echo "Remote binary $PHP_BINARY found..."
+else
+  echo "Remote binary $PHP_BINARY not found ..."
+  exit 1
+fi
+
+# doing the sync
+echo "-------------------------------------------------------"
+echo "Starting the file sync from $FILE_FOLDER to fileadmin"
+rsync -chazP --stats --max-size=10M --exclude="*.zip" --exclude="*.pdf" $USER@$SERVER:$FILE_FOLDER ./public/
+echo "-------------------------------------------------------"
+echo "-------------------------------------------------------"
+echo "Starting the db sync"
+ssh $USER@$SERVER "$PHP_BINARY $CURRENT_FOLDER/bin/typo3 database:export -e 'cache_*' -e '*_log'" | ddev import-db
+echo "Add missing tables"
+ddev console database:updateschema
+echo "Clearing cache"
+ddev console cache:flush
+echo "-------------------------------------------------------"
+exit $?
+

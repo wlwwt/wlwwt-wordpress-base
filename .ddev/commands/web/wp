@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#ddev-generated
+# This assumes that the wp command will be in the $PATH;
+
+## Description: Run WP-CLI (wp) command inside the web container
+## Usage: wp [args]
+## Example: "ddev wp --info"
+## ProjectTypes: wordpress
+
+bin/wp "$@"

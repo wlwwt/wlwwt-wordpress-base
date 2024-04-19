@@ -6,7 +6,8 @@
     "wpackagist-plugin/limit-login-attempts": "1.*",
     "wpackagist-plugin/akismet": "5.*",
     "wpackagist-theme/twentytwentyfour": "1.*",
-    "wordpress/wordpress": "6.*"
+    "wordpress/wordpress": "6.*",
+    "wp-cli/wp-cli": "^2.10"
   },
   "repositories": [
     {
@@ -27,6 +28,7 @@
     "webroot-package": "wordpress/wordpress"
   },
   "config": {
+    "bin-dir": "bin/",
     "allow-plugins": {
       "composer/installers": true,
       "fancyguy/webroot-installer": true

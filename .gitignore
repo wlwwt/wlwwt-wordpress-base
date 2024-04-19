@@ -26,3 +26,5 @@ Thumbs.db
 # Ignore Composer packages.
 
 /vendor/
+/bin/wp
+/bin/wp.bat

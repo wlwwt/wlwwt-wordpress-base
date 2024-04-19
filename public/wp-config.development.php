@@ -17,6 +17,12 @@
  *
  * @package WordPress
  */
+define('WP_ALLOW_REPAIR', true);
+// ** Page settings ** //
+define('WP_SITEURL', 'https://' . $_SERVER['SERVER_NAME'] . '/wp');
+define('WP_HOME',    'https://' . $_SERVER['SERVER_NAME']);
+define('WP_CONTENT_DIR', dirname(__FILE__) . '/wp-content');
+define('WP_CONTENT_URL', 'https://' . $_SERVER['SERVER_NAME'] . '/wp-content');
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
@@ -79,36 +85,15 @@ $table_prefix = 'wp_';
  */
 define( 'WP_DEBUG', true );
 
-/**
- * Uncomment this line to disallow plugin updates through the UI.
- */
-//define( 'DISALLOW_FILE_MODS', true );
+/* Add any custom values between this line and the "stop editing" line. */
 
-/**
- * Set a default value for $_SERVER['HTTP_HOST'] in WP-CLI context.
- *
- * Change this to your site’s host name.
- *
- * The $_SERVER superglobal is an array typically populated by a web server with
- * information such as headers, paths, and script locations. PHP CLI doesn’t
- * populate this variable, nor does WP-CLI, because many of the variable
- * details are meaningless at the command line.
- *
- * @link https://make.wordpress.org/cli/handbook/guides/common-issues/#php-notice-undefined-index-on-_server-superglobal
- */
-if ( defined( 'WP_CLI' ) && WP_CLI && ! isset( $_SERVER['HTTP_HOST'] ) ) {
-	$_SERVER['HTTP_HOST'] = 'wlwwt-wordpress-base.ddev.site';
-}
+
 
 /* That's all, stop editing! Happy publishing. */
 
-/** Custom Content Directory. */
-define( 'WP_CONTENT_DIR', __DIR__ . '/wp-content' );
-define( 'WP_CONTENT_URL', ( ( ! empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] != 'off' ) ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . '/wp-content' );
-
 /** Absolute path to the WordPress directory. */
 if ( ! defined( 'ABSPATH' ) ) {
-	define( 'ABSPATH', __DIR__ . '/wp/' );
+	define( 'ABSPATH', __DIR__ . '/' );
 }
 
 /** Sets up WordPress vars and included files. */

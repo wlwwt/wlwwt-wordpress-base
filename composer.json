@@ -3,10 +3,11 @@
   "description": "",
   "license": "proprietary",
   "require": {
+    "php": ">=8.2.0 <=8.2.99",
     "wpackagist-plugin/limit-login-attempts": "1.*",
     "wpackagist-plugin/akismet": "5.*",
     "wpackagist-theme/twentytwentyfour": "1.*",
-    "wordpress/wordpress": "6.*",
+    "johnpbloch/wordpress": "6.*",
     "wp-cli/wp-cli": "^2.10"
   },
   "repositories": [
@@ -16,22 +17,17 @@
     }
   ],
   "extra": {
+    "wordpress-install-dir": "public/wp",
     "installer-paths": {
-      "public/wp-content/plugins/{$name}/": [
-        "type:wordpress-plugin"
-      ],
-      "public/wp-content/themes/{$name}/": [
-        "type:wordpress-theme"
-      ]
-    },
-    "webroot-dir": "public/wp",
-    "webroot-package": "wordpress/wordpress"
+      "public/wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
+      "public/wp-content/themes/{$name}/": ["type:wordpress-theme"]
+    }
   },
   "config": {
     "bin-dir": "bin/",
     "allow-plugins": {
       "composer/installers": true,
-      "fancyguy/webroot-installer": true
+      "johnpbloch/wordpress-core-installer": true
     }
   },
   "scripts": {

@@ -25,7 +25,6 @@
   },
   "config": {
     "bin-dir": "bin/",
-    "vendor-dir": "public/wp-content/vendor",
     "allow-plugins": {
       "composer/installers": true,
       "johnpbloch/wordpress-core-installer": true

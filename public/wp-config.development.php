@@ -17,7 +17,7 @@
  *
  * @package WordPress
  */
-define('WP_ALLOW_REPAIR', true);
+
 // ** Page settings ** //
 define('WP_SITEURL', 'https://' . $_SERVER['SERVER_NAME'] . '/wp');
 define('WP_HOME',    'https://' . $_SERVER['SERVER_NAME']);

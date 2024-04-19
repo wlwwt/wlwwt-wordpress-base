@@ -24,6 +24,8 @@ define('WP_HOME',    'https://' . $_SERVER['SERVER_NAME']);
 define('WP_CONTENT_DIR', dirname(__FILE__) . '/wp-content');
 define('WP_CONTENT_URL', 'https://' . $_SERVER['SERVER_NAME'] . '/wp-content');
 
+define ('WPLANG', 'de_DE');
+
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
 define( 'DB_NAME', 'db' );

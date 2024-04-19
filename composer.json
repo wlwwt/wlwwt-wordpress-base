@@ -6,7 +6,7 @@
     "php": ">=8.2.0 <=8.2.99",
     "wpackagist-plugin/limit-login-attempts": "1.*",
     "wpackagist-plugin/akismet": "5.*",
-    "wpackagist-theme/twentytwentyfour": "1.*",
+    "wpackagist-theme/twentytwentythree": "1.*",
     "johnpbloch/wordpress": "6.*",
     "wp-cli/wp-cli": "^2.10"
   },

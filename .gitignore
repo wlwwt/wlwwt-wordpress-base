@@ -16,6 +16,7 @@ Thumbs.db
 /public/wp-content/plugins/*
 !/public/wp-content/plugins/index.php
 /public/wp-content/themes/*
+!/public/wp-content/themes/wlwwt
 !/public/wp-content/themes/index.php
 /public/wp-content/languages
 

@@ -5,8 +5,7 @@
   "require": {
     "php": ">=8.2.0 <=8.2.99",
     "wpackagist-plugin/limit-login-attempts": "1.*",
-    "wpackagist-theme/twentytwentythree": "1.*",
-    "wpackagist-theme/envo-royal": "1.*",
+    "wpackagist-theme/kadence": "1.2.*",
     "johnpbloch/wordpress": "6.*",
     "wp-cli/wp-cli": "^2.10"
   },

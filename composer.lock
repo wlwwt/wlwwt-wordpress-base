@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e55b90bedb8ebf022bb439d34565794d",
+    "content-hash": "409451aa66ecb595fcaa1a0a8abbb6fa",
     "packages": [
         {
             "name": "composer/installers",
@@ -616,40 +616,22 @@
             "homepage": "https://wordpress.org/plugins/limit-login-attempts/"
         },
         {
-            "name": "wpackagist-theme/envo-royal",
-            "version": "1.0.2",
+            "name": "wpackagist-theme/kadence",
+            "version": "1.2.4",
             "source": {
                 "type": "svn",
-                "url": "https://themes.svn.wordpress.org/envo-royal/",
-                "reference": "1.0.2"
+                "url": "https://themes.svn.wordpress.org/kadence/",
+                "reference": "1.2.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/theme/envo-royal.1.0.2.zip"
+                "url": "https://downloads.wordpress.org/theme/kadence.1.2.4.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
             },
             "type": "wordpress-theme",
-            "homepage": "https://wordpress.org/themes/envo-royal/"
-        },
-        {
-            "name": "wpackagist-theme/twentytwentythree",
-            "version": "1.4",
-            "source": {
-                "type": "svn",
-                "url": "https://themes.svn.wordpress.org/twentytwentythree/",
-                "reference": "1.4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/theme/twentytwentythree.1.4.zip"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-theme",
-            "homepage": "https://wordpress.org/themes/twentytwentythree/"
+            "homepage": "https://wordpress.org/themes/kadence/"
         }
     ],
     "packages-dev": [],

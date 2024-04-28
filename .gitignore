@@ -30,3 +30,6 @@ Thumbs.db
 /vendor/
 /bin/wp
 /bin/wp.bat
+
+# Deployment
+.build

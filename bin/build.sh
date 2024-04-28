@@ -2,16 +2,15 @@
 
 set -euo pipefail
 
-REPO=https://github.com/wlwwt/seo-producer-python
+REPO=https://github.com/wlwwt/wlwwt-wordpress-base
 BRANCH=main
-TOKEN=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
+TOKEN=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
 
 CLEANUP_ITEMS=(
   ".ddev/"
   "ansible/"
   "bin/build.sh"
   "bin/sync"
-  "bin/wp"
   "bin/wp.bat"
   "var/"
   "public/wp-config.development.php"
@@ -33,6 +32,8 @@ function build() {
   mkdir -p artifact
   mkdir -p dist
 
+	echo "##-> Downloading project from $REPO in branch $BRANCH"
+	echo $REPO/tarball/$BRANCH
   curl -L -k -u token:$TOKEN $REPO/tarball/$BRANCH | (cd artifact && tar -xz --strip-components=1 -)
 
   echo "##-> Getting project from $REPO in branch $BRANCH"

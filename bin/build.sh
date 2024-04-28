@@ -2,38 +2,23 @@
 
 set -euo pipefail
 
-REPO=---project-repository---
+REPO=https://github.com/wlwwt/seo-producer-python
 BRANCH=main
+TOKEN=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
 
 CLEANUP_ITEMS=(
   ".ddev/"
   "ansible/"
   "bin/build.sh"
-  "bin/doctrine-dbal"
-  "bin/fluid"
-  "bin/php-cs-fixer"
-  "bin/php-parse"
-  "bin/phpstan"
-  "bin/phpstan.phar"
-  "bin/pscss"
-  "bin/replace_symlink.sh"
   "bin/sync"
-  "bin/t3-cs"
-  "bin/typo3-coding-standards"
-  "bin/var-dump-server"
-  "bin/yaml-lint"
-  "boilerplate/"
-  "extensions/"
+  "bin/wp"
+  "bin/wp.bat"
   "var/"
-  "public/.htaccess_development"
+  "public/wp-config.development.php"
   ".editorconfig"
-  ".env.development"
   ".gitignore"
-  ".php-cs-fixer.dist.php"
-  "bitbucket-pipelines.yml"
   "composer.json"
   "composer.lock"
-  "phpstan.neon"
   "README.md")
 
 # FUNCTIONS
@@ -48,16 +33,13 @@ function build() {
   mkdir -p artifact
   mkdir -p dist
 
-  git archive --format=tar --remote=$REPO $BRANCH | (cd artifact && tar xf -)
+  curl -L -k -u token:$TOKEN $REPO/tarball/$BRANCH | (cd artifact && tar -xz --strip-components=1 -)
 
   echo "##-> Getting project from $REPO in branch $BRANCH"
   cd artifact || return
 
   echo "##-> Composer install"
   composer install --no-dev
-
-  echo "##-> Dropping linked extensions from web/typo3conf/ext"
-  find vendor/communiacs -type l -exec ../../bin/replace_symlink.sh {} +
 
   echo "##-> Removing files and folders"
 

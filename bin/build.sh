@@ -4,7 +4,7 @@ set -euo pipefail
 
 REPO=https://github.com/wlwwt/seo-producer-python
 BRANCH=main
-TOKEN=
+TOKEN=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
 
 CLEANUP_ITEMS=(
   ".ddev/"

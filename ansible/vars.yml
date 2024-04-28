@@ -6,6 +6,4 @@ shared_paths:
     {src: "../../../shared/public/wp-config.php", dest: "public/wp-config.php", state: "touch", symlink: "true"},
     {src: "../../../../shared/public/wp-content/languages", dest: "public/wp-content/languages", state: "directory", symlink: "true"},
     {src: "../../../../shared/public/wp-content/uploads", dest: "public/wp-content/uploads", state: "directory", symlink: "true"},
-    {src: "../../../shared/public/.htpasswd", dest: "public/.htpasswd", state: "touch", symlink: "true"},
-    {src: "../../../shared/public/typo3temp", dest: "public/typo3temp", state: "directory", symlink: "true"}
   ]

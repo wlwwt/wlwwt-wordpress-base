@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "409451aa66ecb595fcaa1a0a8abbb6fa",
+    "content-hash": "8878b01e1c6c4bf4c340bd40e35db22e",
     "packages": [
         {
             "name": "composer/installers",
@@ -632,6 +632,24 @@
             },
             "type": "wordpress-theme",
             "homepage": "https://wordpress.org/themes/kadence/"
+        },
+        {
+            "name": "wpackagist-theme/twentytwentyfour",
+            "version": "1.1",
+            "source": {
+                "type": "svn",
+                "url": "https://themes.svn.wordpress.org/twentytwentyfour/",
+                "reference": "1.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/theme/twentytwentyfour.1.1.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-theme",
+            "homepage": "https://wordpress.org/themes/twentytwentyfour/"
         }
     ],
     "packages-dev": [],

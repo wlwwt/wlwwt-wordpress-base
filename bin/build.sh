@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-REPO=https://github.com/wlwwt/wlwwt-wordpress-base
+REPO=https://api.github.com/repos/wlwwt/wlwwt-wordpress-base
 BRANCH=main
 TOKEN=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
 
@@ -16,8 +16,6 @@ CLEANUP_ITEMS=(
   "public/wp-config.development.php"
   ".editorconfig"
   ".gitignore"
-  "composer.json"
-  "composer.lock"
   "README.md")
 
 # FUNCTIONS
@@ -34,7 +32,7 @@ function build() {
 
 	echo "##-> Downloading project from $REPO in branch $BRANCH"
 	echo $REPO/tarball/$BRANCH
-  curl -L -k -u token:$TOKEN $REPO/tarball/$BRANCH | (cd artifact && tar -xz --strip-components=1 -)
+  curl -L $REPO/tarball/$BRANCH | (cd artifact && tar -xz --strip-components=1 -)
 
   echo "##-> Getting project from $REPO in branch $BRANCH"
   cd artifact || return

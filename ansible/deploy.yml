@@ -48,11 +48,11 @@
         path: "{{ deploy_helper.new_release_path }}/{{ item.dest }}"
         src: "{{ item.src }}"
       loop: "{{ shared_paths|flatten(levels=1) | selectattr('symlink', 'equalto', 'true') | list }}"
-    - name: Create htaccess symlink
-      file:
-        state: link
-        path: "{{ deploy_helper.new_release_path }}/public/.htaccess"
-        src: ".htaccess_production"
+#    - name: Create htaccess symlink
+#      file:
+#        state: link
+#        path: "{{ deploy_helper.new_release_path }}/public/.htaccess"
+#        src: ".htaccess_production"
 #    - name: Run TYPO3 console commands
 #      command: "{{ php_interpreter }} bin/typo3 {{ item }}"
 #      args:

@@ -23,7 +23,6 @@ Thumbs.db
 # Ignore files containing sensitive information.
 
 /public/wp-config.php
-/public/.htaccess
 
 # Ignore Composer packages.
 

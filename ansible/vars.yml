@@ -5,5 +5,6 @@ shared_paths:
   [
     {src: "../../../shared/public/wp-config.php", dest: "public/wp-config.php", state: "touch", symlink: "true"},
     {src: "../../../../shared/public/wp-content/languages", dest: "public/wp-content/languages", state: "directory", symlink: "true"},
+    {src: "../../../../shared/public/wp-content/cache", dest: "public/wp-content/cache", state: "directory", symlink: "true"},
     {src: "../../../../shared/public/wp-content/uploads", dest: "public/wp-content/uploads", state: "directory", symlink: "true"},
   ]

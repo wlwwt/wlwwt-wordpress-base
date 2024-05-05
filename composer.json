@@ -7,7 +7,8 @@
     "wpackagist-plugin/limit-login-attempts": "1.*",
     "wpackagist-theme/kadence": "1.2.*",
     "johnpbloch/wordpress": "6.*",
-    "wp-cli/wp-cli": "^2.10"
+    "wp-cli/wp-cli": "^2.10",
+    "wpackagist-plugin/wp-piwik": "^1.0"
   },
   "repositories": [
     {

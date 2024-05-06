@@ -92,13 +92,7 @@ FileETag None
 # END LBCWpFastestCache
 
 # BEGIN Custom Changes
-# HTTPS enforcement
-<IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteCond %{HTTPS} off
-RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [NE,L,R=301]
-</IfModule>
-# END Custom Changes
+
 
 # BEGIN WordPress
 # The directives (lines) between "BEGIN WordPress" and "END WordPress" are

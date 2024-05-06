@@ -14,6 +14,7 @@ CLEANUP_ITEMS=(
   "bin/wp.bat"
   "var/"
   "public/wp-config.development.php"
+  "public/.htaccess_development"
   ".editorconfig"
   ".gitignore"
   "README.md")

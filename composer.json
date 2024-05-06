@@ -36,7 +36,8 @@
     ],
     "configure-wordpresss": [
       "@composer install",
-      "ln -sfn wp-config.development.php public/wp-config.php"
+      "ln -sfn wp-config.development.php public/wp-config.php",
+      "ln -sfn .htaccess_development public/.htaccess"
     ],
     "build": [
       "./bin/build.sh build"

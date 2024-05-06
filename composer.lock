@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fb3d3042a82c777735a560879cb25463",
+    "content-hash": "5bf63e6d37230adfcb2e389792408ded",
     "packages": [
         {
             "name": "composer/installers",
@@ -632,24 +632,6 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/wp-piwik/"
-        },
-        {
-            "name": "wpackagist-theme/kadence",
-            "version": "1.2.4",
-            "source": {
-                "type": "svn",
-                "url": "https://themes.svn.wordpress.org/kadence/",
-                "reference": "1.2.4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/theme/kadence.1.2.4.zip"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-theme",
-            "homepage": "https://wordpress.org/themes/kadence/"
         }
     ],
     "packages-dev": [],

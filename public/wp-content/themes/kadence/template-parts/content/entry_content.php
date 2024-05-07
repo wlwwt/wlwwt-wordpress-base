@@ -36,4 +36,6 @@ namespace Kadence;
 	);
 	do_action( 'kadence_single_after_entry_content' );
 	?>
+	<p>Buchen Sie jetzt Ihr perfektes Ferienhaus in Dänemark und erleben Sie die dänische Kultur hautnah!</strong> <a href="https://daenische-geschichten.de/jetzt-ferienhaus-buchen/">Ferienhäuser in Dänemark entdecken</a></p>
+
 </div><!-- .entry-content -->

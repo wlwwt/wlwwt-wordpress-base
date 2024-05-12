@@ -1,9 +1,16 @@
 all:
   hosts:
-    production:
+    denmark:
       ansible_host: p668016.mittwaldserver.info
       ansible_user: p668016
       ansible_remote_tmp: ~/tmp
       ansible_python_interpreter: /usr/local/bin/python
       php_interpreter: /usr/local/bin/php
       root_folder: ~/html/production-6
+    wealth:
+      ansible_host: p668016.mittwaldserver.info
+      ansible_user: p668016
+      ansible_remote_tmp: ~/tmp
+      ansible_python_interpreter: /usr/local/bin/python
+      php_interpreter: /usr/local/bin/php
+      root_folder: ~/html/wealth/production-6

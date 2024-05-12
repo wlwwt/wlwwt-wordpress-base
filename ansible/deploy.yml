@@ -1,5 +1,5 @@
 ---
-- hosts: production
+- hosts: all
   vars_files:
     - vars.yml
   pre_tasks:
@@ -52,7 +52,7 @@
       file:
         state: link
         path: "{{ deploy_helper.new_release_path }}/public/.htaccess"
-        src: ".htaccess_production"
+        src: ".htaccess_{{ inventory_hostname }}"
 #    - name: Run TYPO3 console commands
 #      command: "{{ php_interpreter }} bin/typo3 {{ item }}"
 #      args:

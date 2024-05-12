@@ -3,7 +3,7 @@
 Plugin Name: WP Fastest Cache
 Plugin URI: http://wordpress.org/plugins/wp-fastest-cache/
 Description: The simplest and fastest WP Cache system
-Version: 1.2.5
+Version: 1.2.6
 Author: Emre Vona
 Author URI: https://www.wpfastestcache.com/
 Text Domain: wp-fastest-cache
@@ -1293,6 +1293,12 @@ GNU General Public License for more details.
 				}
 
 				if($new_status == "trash" && $old_status == "publish"){
+
+					if($post->post_type == "shop_coupon"){
+						// YITH WooCommerce Coupon Email System Premium
+						return;
+					}
+
 					$this->singleDeleteCache(false, $post->ID);
 				}else if(($new_status == "draft" || $new_status == "pending" || $new_status == "private") && $old_status == "publish"){
 					$this->deleteCache();
@@ -2068,28 +2074,28 @@ GNU General Public License for more details.
 		}
 
 		public function getABSPATH(){
-			return get_home_path();
 
-			// 10.02.2024
+			if(function_exists("get_home_path")){
+				return get_home_path();
+			}else{
+
+				$path = ABSPATH;
+				$siteUrl = site_url();
+				$homeUrl = home_url();
+				$diff = str_replace($homeUrl, "", $siteUrl);
+				$diff = trim($diff,"/");
+
+			    $pos = strrpos($path, $diff);
+
+			    if($pos !== false){
+			    	$path = substr_replace($path, "", $pos, strlen($diff));
+			    	$path = trim($path,"/");
+			    	$path = "/".$path."/";
+			    }
+			    return $path;
+
+			}
 			
-			// $path = ABSPATH;
-			// $siteUrl = site_url();
-			// $homeUrl = home_url();
-			// $diff = str_replace($homeUrl, "", $siteUrl);
-			// $diff = trim($diff,"/");
-
-		 //    $pos = strrpos($path, $diff);
-
-		 //    if($pos !== false){
-		 //    	$path = substr_replace($path, "", $pos, strlen($diff));
-		 //    	$path = trim($path,"/");
-		 //    	$path = "/".$path."/";
-		 //    }
-		 //    return $path;
-
-
-
-
 		}
 
 		public function rm_folder_recursively($dir, $i = 1) {

@@ -63,6 +63,10 @@
 				wp_send_json_error("Wrong Wild Card Usage");
 			}
 
+			if(preg_match("/\.{2,}/", $_POST["url"])){
+				wp_send_json_error("May be Directory Traversal Attack");
+			}
+
 			$_POST["url"] = sanitize_url($_POST["url"]);
 			$_POST["order"] = sanitize_text_field($_POST["order"]);
 

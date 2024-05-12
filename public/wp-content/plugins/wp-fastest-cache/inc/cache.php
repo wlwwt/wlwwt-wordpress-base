@@ -93,7 +93,13 @@
 				if(isset($_SERVER["HTTP_X_GT_LANG"])){
 					$this->cacheFilePath = $this->getWpContentDir("/cache/".$type."/").$_SERVER["HTTP_X_GT_LANG"].$_SERVER["REQUEST_URI"];
 				}else if(isset($_SERVER["REDIRECT_URL"]) && $_SERVER["REDIRECT_URL"] != "/index.php"){
-					$this->cacheFilePath = $this->getWpContentDir("/cache/".$type."/").$_SERVER["REDIRECT_URL"];
+                    $redirect_url =  $_SERVER["REDIRECT_URL"];
+
+                    if(isset($_SERVER["REDIRECT_QUERY_STRING"]) && defined('WPFC_CACHE_QUERYSTRING') && WPFC_CACHE_QUERYSTRING){
+                        $redirect_url .= "?".$_SERVER["REDIRECT_QUERY_STRING"];
+                    }
+
+                    $this->cacheFilePath = $this->getWpContentDir("/cache/" . $type . "/") . $redirect_url;
 				}else if(isset($_SERVER["REQUEST_URI"])){
 					$this->cacheFilePath = $this->getWpContentDir("/cache/".$type."/").$_SERVER["REQUEST_URI"];
 				}

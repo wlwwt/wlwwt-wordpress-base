@@ -21,14 +21,6 @@
     - name: Initialize the deploy root and gather facts
       community.general.deploy_helper:
         path: "{{ root_folder }}"
-#    - name: Create backup dir in current release
-#      file:
-#        state: directory
-#        path: "{{ deploy_helper.current_path }}/backup"
-#    - name: Create database backup
-#      shell:
-#        cmd: "{{ php_interpreter }} bin/typo3 database:export | gzip -c > backup/database_backup_{{ ansible_date_time.iso8601_micro }}.sql.gz"
-#        chdir: "{{ deploy_helper.current_path }}"
     - name: Create release path
       file:
         state: directory
@@ -48,24 +40,16 @@
         path: "{{ deploy_helper.new_release_path }}/{{ item.dest }}"
         src: "{{ item.src }}"
       loop: "{{ shared_paths|flatten(levels=1) | selectattr('symlink', 'equalto', 'true') | list }}"
+    - name: Deploy theme based on the environment
+      command: "mv kadence_{{ inventory_hostname }} kadence && rm -Rf kadence_*"
+      args:
+        chdir: "{{ root_folder }}/releases/{{ deploy_helper.new_release }}/public/wp-content/themes/"
     - name: Create htaccess symlink
       file:
         state: link
         path: "{{ deploy_helper.new_release_path }}/public/.htaccess"
         src: ".htaccess_{{ inventory_hostname }}"
-#    - name: Run TYPO3 console commands
-#      command: "{{ php_interpreter }} bin/typo3 {{ item }}"
-#      args:
-#        chdir: "{{ deploy_helper.new_release_path }}"
-#      loop:
-#        - "database:updateschema"
-#        - "cache:flush"
-#    - name: Clear OPcache
-#      command: "{{ item }}"
-#      args:
-#        chdir: "{{ deploy_helper.new_release_path }}"
-#      loop:
-#        - "sudo systemctl reload apache2"
+
     - name: Finalize the deploy, switching the symlink
       command: "ln -sfn releases/{{ deploy_helper.new_release }} current"
       args:

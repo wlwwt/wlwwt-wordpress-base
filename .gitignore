@@ -19,7 +19,7 @@ Thumbs.db
 !/public/wp-content/plugins/wordpress-seo
 !/public/wp-content/plugins/wp-fastest-cache
 /public/wp-content/themes/*
-!/public/wp-content/themes/kadence
+!/public/wp-content/themes/kadence_*
 !/public/wp-content/themes/index.php
 /public/wp-content/languages
 /public/wp-content/cache

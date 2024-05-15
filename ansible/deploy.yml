@@ -41,13 +41,13 @@
         src: "{{ item.src }}"
       loop: "{{ shared_paths|flatten(levels=1) | selectattr('symlink', 'equalto', 'true') | list }}"
     - name: Deploy theme based on the environment
-      command: "mv kadence_{{ inventory_hostname }} kadence"
+      command: "mv themes_{{ inventory_hostname }} themes"
       args:
-        chdir: "{{ root_folder }}/releases/{{ deploy_helper.new_release }}/public/wp-content/themes/"
+        chdir: "{{ root_folder }}/releases/{{ deploy_helper.new_release }}/public/wp-content"
     - name: Remove the other themes
-      command: "rm -Rf kadence_*"
+      command: "rm -Rf themes_*"
       args:
-        chdir: "{{ root_folder }}/releases/{{ deploy_helper.new_release }}/public/wp-content/themes/"
+        chdir: "{{ root_folder }}/releases/{{ deploy_helper.new_release }}/public/wp-content"
     - name: Create htaccess symlink
       file:
         state: link

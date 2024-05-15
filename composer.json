@@ -36,7 +36,8 @@
     "configure-wordpresss": [
       "@composer install",
       "ln -sfn wp-config.development.php public/wp-config.php",
-      "ln -sfn .htaccess_development public/.htaccess"
+      "ln -sfn .htaccess_development public/.htaccess",
+      "ln -sfn .htaccess_development public/.htaccess",
     ],
     "build": [
       "./bin/build.sh build"
@@ -51,7 +52,7 @@
     ],
     "deploy-wealth": [
       "./bin/build.sh build",
-      "ansible-playbook -i ansible/inventory.yml ansible/deploy.yml --limit wealth ",
+      "ansible-playbook -i ansible/inventory.yml ansible/deploy.yml --limit wealth",
       "./bin/build.sh cleanup"
     ],
     "deploy-unlock": [

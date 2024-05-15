@@ -41,7 +41,11 @@
         src: "{{ item.src }}"
       loop: "{{ shared_paths|flatten(levels=1) | selectattr('symlink', 'equalto', 'true') | list }}"
     - name: Deploy theme based on the environment
-      command: "mv kadence_{{ inventory_hostname }} kadence && rm -Rf kadence_*"
+      command: "mv kadence_{{ inventory_hostname }} kadence"
+      args:
+        chdir: "{{ root_folder }}/releases/{{ deploy_helper.new_release }}/public/wp-content/themes/"
+    - name: Remove the other themes
+      command: "rm -Rf kadence_*"
       args:
         chdir: "{{ root_folder }}/releases/{{ deploy_helper.new_release }}/public/wp-content/themes/"
     - name: Create htaccess symlink

@@ -55,6 +55,11 @@
       "ansible-playbook -i ansible/inventory.yml ansible/deploy.yml --limit wealth",
       "./bin/build.sh cleanup"
     ],
+    "deploy-tech": [
+      "./bin/build.sh build",
+      "ansible-playbook -i ansible/inventory.yml ansible/deploy.yml --limit tech",
+      "./bin/build.sh cleanup"
+    ],
     "deploy-unlock": [
       "ansible-playbook -i ansible/inventory.yml ansible/unlock.yml"
     ],

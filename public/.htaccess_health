@@ -4,13 +4,13 @@
 RewriteEngine On
 RewriteBase /
 RewriteCond %{HTTPS} =on
-RewriteCond %{HTTP_HOST} ^wlwwt.de
+RewriteCond %{HTTP_HOST} ^gesundundhappy.de
 # Start WPFC Exclude
 # End WPFC Exclude
 # Start_WPFC_Exclude_Admin_Cookie
 RewriteCond %{HTTP:Cookie} !wordpress_logged_in_[^\=]+\=admin_wlwwt
 # End_WPFC_Exclude_Admin_Cookie
-RewriteCond %{HTTP_HOST} ^wlwwt.de
+RewriteCond %{HTTP_HOST} ^gesundundhappy.de
 RewriteCond %{HTTP_USER_AGENT} !(facebookexternalhit|WP_FASTEST_CACHE_CSS_VALIDATOR|Twitterbot|LinkedInBot|WhatsApp|Mediatoolkitbot)
 RewriteCond %{HTTP_USER_AGENT} !(WP\sFastest\sCache\sPreload(\siPhone\sMobile)?\s*Bot)
 RewriteCond %{REQUEST_METHOD} !POST

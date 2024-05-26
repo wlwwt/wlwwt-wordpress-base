@@ -3,7 +3,7 @@
 Plugin Name: WP Fastest Cache
 Plugin URI: http://wordpress.org/plugins/wp-fastest-cache/
 Description: The simplest and fastest WP Cache system
-Version: 1.2.6
+Version: 1.2.7
 Author: Emre Vona
 Author URI: https://www.wpfastestcache.com/
 Text Domain: wp-fastest-cache
@@ -1338,6 +1338,11 @@ GNU General Public License for more details.
 				foreach ($urls as $key => $value) {
 
 					if(preg_match("/https?:\/\/[^\/]+\/(.+)/", $value->url, $out)){
+
+						if(preg_match("/\.{2,}/", $out[1])){
+							// to prevent Directory Traversal Attack
+							continue;
+						}
 
 						if(preg_match("/\/\(\.\*\)/", $out[1])){
 							$out[1] = str_replace("(.*)", "", $out[1]);

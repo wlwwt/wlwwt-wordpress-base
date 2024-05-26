@@ -1030,6 +1030,11 @@
 							*/
 							$pre_buffer[0][$key] = preg_replace('/\\\\\\\\/', '\\\\\\\\\\', $pre_buffer[0][$key]);
 
+							/*
+							/\
+							*/
+							$pre_buffer[0][$key] = preg_replace('/\/\\\\/', '/\\\\\\', $pre_buffer[0][$key]);
+
 							$content = preg_replace("/".preg_quote($value, "/")."/", $pre_buffer[0][$key], $content);
 						}
 					}

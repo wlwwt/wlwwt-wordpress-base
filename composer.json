@@ -45,6 +45,11 @@
     "build-clean": [
       "./bin/build.sh cleanup"
     ],
+    "deploy": [
+      "./bin/build.sh build",
+      "ansible-playbook -i ansible/inventory.yml ansible/deploy.yml",
+      "./bin/build.sh cleanup"
+    ],
     "deploy-denmark": [
       "./bin/build.sh build",
       "ansible-playbook -i ansible/inventory.yml ansible/deploy.yml --limit denmark",
